@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>basket.js with CSS</title>
+    <style>
+        .lazy {
+        display: none;
+        }
+    </style>
+</head>
+<body>
+<script src="./lib/create-stylesheet.js"></script>
+<script src="./lib/basket.full.min.js"></script>
+<!-- 
+    basket.full.min.js =  basket + rsvp
+
+    <script src="./lib/rsvp-latest.js"></script>
+    <script src="./lib/basket.js"></script> 
+-->
+<div id="absolute">green (absolute @import)</div>
+<div id="relative">blue (relative @import)</div>
+
+
+
+<img class="imgcache" data-url="./imgs/elephant.png" >
+<noscript>
+    <p><i>You need to have JavaScript enabled to save images in localStorage.</i></p>
+    <img src="./imgs/touxiang.jpg" alt="">
+</noscript>  
+
+
+<img class="imgcache" data-url="./imgs/rhino.png" >
+<noscript>
+    <p><i>You need to have JavaScript enabled to save images in localStorage.</i></p>
+    <img src="./imgs/touxiang.jpg" alt="">
+</noscript>  
+
+
+
+<script>
+
+// js
+basket.require(
+    { url: './lib/jquery-2.1.4.js', key:'jquery'}
+);
+
+// css
+basket.require({ url: './css/styles.css', execute: false, key: 'mainCSS' }).then(function(responses) {
+    // HACK: function parameters for the promise method don't appear to be documented, but they contain the responses for now.
+    var css = responses[0].data;
+    stylesheet.appendStyleSheet(css, function(err, style) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log("Stylesheet successfully load via basket.js");
+        }
+    });
+});
+
+// image
+// basket.require(
+//     { url: './imgs/touxiang.jpg',execute: false}
+// ).then(function(responses) {
+//     // HACK: function parameters for the promise method don't appear to be documented, but they contain the responses for now.
+//     var img = responses[0].data;
+
+//     console.log(img);
+
+//     var elephant = document.getElementById("elephant");
+//     elephant.setAttribute("src",img);
+
+
+// });
+
+</script>
+
+<script src="./lib/imgcache.js"></script>
+
+</body>
+</html>
+
+
+
+
+
